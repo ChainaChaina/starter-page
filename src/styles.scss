@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+//CSS reset
+
+*, 
+*:after,
+*:before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+body{
+    font-size: 100%;
+    list-style-type: none;
+}
+
+
+// USABLE FONTS
+
+// font-family: 'Chakra Petch', sans-serif;
+
+// font-family: 'DotGothic16', sans-serif;
+
+// font-family: 'Nunito Sans', sans-serif;
+
+// font-family: 'Roboto Mono', monospace;   // 400 and 700
+

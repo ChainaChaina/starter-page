@@ -1,0 +1,50 @@
+.container{
+    background-color: #0a1c28;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    p{
+        color: #55c859;
+        font-family: 'Nunito Sans', sans-serif;
+    }
+}
+
+pre{
+    color: #55c859;
+    margin: auto;
+}
+
+.greeting{
+    margin: 0px auto;
+    margin-top: 5rem;
+    font-size: 3rem;
+}
+
+.date{
+    margin: 0px auto;
+    margin-top: 1rem;
+    font-size: 6rem;
+}
+
+
+
+.overflow{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.536);
+    .search{
+        margin: auto;
+        font-size: 15rem;
+        font-family: 'DotGothic16', sans-serif;
+        color: #55c859;
+    }
+
+}
