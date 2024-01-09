@@ -14,6 +14,7 @@
 pre{
     color: #55c859;
     margin: auto;
+    font-size: 0.5rem;
 }
 
 .greeting{
@@ -27,8 +28,6 @@ pre{
     margin-top: 1rem;
     font-size: 6rem;
 }
-
-
 
 .overflow{
     position: absolute;
@@ -46,5 +45,8 @@ pre{
         font-family: 'DotGothic16', sans-serif;
         color: #55c859;
     }
+}
 
+.shortCut{
+    color: #a3f2a6 !important;
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import moment from 'moment';
+import shortCutModel from '../models/shortCutModel';
 
 
 @Injectable({
@@ -9,6 +10,15 @@ export class AppServiceService {
   greetin: string;
   time: string;
   date: string;
+  shortCuts: shortCutModel[] = [
+    {word: 'zap', link: 'https://web.whatsapp.com/'},
+    {word: 'amz', link: 'https://www.amazon.com.br/'},
+    {word: 'git', link: 'https://github.com/'},
+    {word: 'twt', link: 'https://twitter.com/home'},
+    {word: 'net', link: 'https://www.netflix.com/browse'},
+    {word: 'amv', link: 'https://www.primevideo.com/-/pt/storefront/ref=atv_hm_tv_c_9zZ8D2_hom?language=pt_BR'},
+    {word: 'ins', link: 'https://www.instagram.com/'},
+  ]
 
   constructor() {
     this.date = moment().format("MMM Do");
@@ -21,6 +31,14 @@ export class AppServiceService {
 
   getDate(): string {
     return this.date
+  }
+
+  checkShortCut(word): string |void {
+    for (let i = 0; i < this.shortCuts.length; i++){
+      if (word == this.shortCuts[i].word){
+        return this.shortCuts[i].link
+      }
+    }
   }
 
   getGreetins(): string {
@@ -50,9 +68,13 @@ export class AppServiceService {
     }
   }
 
-  search(payload: string) {
+  webSearch(payload: string) {
     const googleSearchUrl = `https://www.google.com/search?q=${payload}`;
     window.location.href = googleSearchUrl;
+  }
+
+  webGo(payload: string) {
+    window.location.href = payload;
   }
 
   getHentai() {
