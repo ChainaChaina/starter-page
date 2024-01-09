@@ -52,6 +52,9 @@ export class AppComponent {
       this.resetSearch()
     }
   }
+  ngAfterViewInit(): void {
+    this.urlInput.nativeElement.focus()
+  }
 
  
   ngOnInit(): void {
@@ -59,7 +62,6 @@ export class AppComponent {
     this.greetin = this.appService.getGreetins()
     this.date = this.appService.getDate()
     this.hentai = this.appService.getHentai()
-    this.urlInput.nativeElement.focus()
   }
 
   resetSearch(){
