@@ -14,7 +14,32 @@
 pre{
     color: #55c859;
     margin: auto;
+    margin-top: 2rem;
     font-size: 0.5rem;
+}
+
+.author{
+    min-height: 20px;
+    margin: 0px auto;
+    margin-top: 1rem;
+    font-size: 1rem;
+
+}
+
+.text-quote{
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+    
+}
+
+.quote{
+    max-width: 1000px;
+    margin: 0px auto;
+    margin-top: 5rem;
+    font-size: 2rem;
+    padding: 0px 200px;
+    text-align: center;
 }
 
 .greeting{

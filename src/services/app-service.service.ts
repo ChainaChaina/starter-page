@@ -1,70 +1,76 @@
 import { Injectable } from '@angular/core';
 import moment from 'moment';
 import shortCutModel from '../models/shortCutModel';
+import { HttpClient } from '@angular/common/http';
+
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AppServiceService {
   greetin: string;
   time: string;
   date: string;
-  shortCuts: shortCutModel[] = [
-    {word: 'zap', link: 'https://web.whatsapp.com/'},
-    {word: 'amz', link: 'https://www.amazon.com.br/'},
-    {word: 'git', link: 'https://github.com/'},
-    {word: 'twt', link: 'https://twitter.com/home'},
-    {word: 'net', link: 'https://www.netflix.com/browse'},
-    {word: 'amv', link: 'https://www.primevideo.com/-/pt/storefront/ref=atv_hm_tv_c_9zZ8D2_hom?language=pt_BR'},
-    {word: 'ins', link: 'https://www.instagram.com/'},
-  ]
 
-  constructor() {
-    this.date = moment().format("MMM Do");
+  shortCuts: shortCutModel[] = [
+    { word: 'zap', link: 'https://web.whatsapp.com/' },
+    { word: 'amz', link: 'https://www.amazon.com.br/' },
+    { word: 'git', link: 'https://github.com/' },
+    { word: 'twt', link: 'https://twitter.com/home' },
+    { word: 'net', link: 'https://www.netflix.com/browse' },
+    {
+      word: 'amv',
+      link: 'https://www.primevideo.com/-/pt/storefront/ref=atv_hm_tv_c_9zZ8D2_hom?language=pt_BR',
+    },
+    { word: 'ins', link: 'https://www.instagram.com/' },
+  ];
+
+  constructor(
+    private http: HttpClient
+    ) {
+    this.date = moment().format('MMM Do');
     this.time = moment().format('LT');
   }
 
   getTime(): string {
-    return this.time
+    return this.time;
   }
 
   getDate(): string {
-    return this.date
+    return this.date;
   }
 
-  checkShortCut(word): string |void {
-    for (let i = 0; i < this.shortCuts.length; i++){
-      if (word == this.shortCuts[i].word){
-        return this.shortCuts[i].link
+  getQuote() {
+    return this.http.get('https://api.quotable.io/quotes/random');
+  }
+
+  checkShortCut(word): string | void {
+    for (let i = 0; i < this.shortCuts.length; i++) {
+      if (word == this.shortCuts[i].word) {
+        return this.shortCuts[i].link;
       }
     }
   }
 
   getGreetins(): string {
-    let rn = Math.random() * 10
+    let rn = Math.random() * 10;
     if (this.getTime().includes('AM')) {
       if (rn > 8) {
-        return "Working hours"
-      } else
-        if (rn > 4) {
-          return "Focus"
-        } else
-          if (rn > 2) {
-            return "Sunshine"
-          } else
-            return "It's bright outside"
+        return 'Working hours';
+      } else if (rn > 4) {
+        return 'Focus';
+      } else if (rn > 2) {
+        return 'Sunshine';
+      } else return "It's bright outside";
     } else {
       if (rn > 8) {
-        return "Party time"
-      } else
-        if (rn > 4) {
-          return "Moon rises"
-        } else
-          if (rn > 2) {
-            return "What a horrible night to have a curse."
-          } else
-            return "Star light"
+        return 'Party time';
+      } else if (rn > 4) {
+        return 'Moon rises';
+      } else if (rn > 2) {
+        return 'What a horrible night to have a curse.';
+      } else return 'Star light';
     }
   }
 
@@ -78,9 +84,9 @@ export class AppServiceService {
   }
 
   getHentai() {
-    let rn = Math.random() * 10
-    if (rn > 9){
-      return (`
+    let rn = Math.random() * 10;
+    if (rn > 9) {
+      return `
       ⣿⣿⣿⣿⣿⣿⣿⢛⢉⠀⠠⣰⣵⣾⠋⠜⠠⢊⣄⣾⣿⣿⠟⠁⡜⢡⣾⣿⣿⣿⣿⡟⣡⣿⡿⠁⠰⠇⠀⢹⠟⠀⠉⠉⠃⠀⠀⠠⠇⠢⡄⢀⣀⣴⣿⣌⡂⣻⣿⣿⣦⣤⣿⣿⣿
       ⣿⣿⣿⣿⣿⠟⣡⠏⣮⣸⣷⣿⣿⢃⠈⠀⣰⣿⣿⣿⣿⡏⠀⡜⢠⣿⣿⣿⣿⡿⢋⣴⣿⡿⠁⢠⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⠶⣭⢻⠛⢸⠿⢛⠿⣿⣿⣍⡩
       ⣿⣿⣿⢿⢋⣾⡟⢸⣿⣿⣿⡿⠃⠀⠀⣼⣿⣿⣿⣿⡟⡀⡘⢀⣿⣿⣿⡿⢋⣴⣿⣿⡟⠠⢀⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⡡⣤⠂⢻⣿⣿⣮⡹⣿⣿
@@ -114,10 +120,10 @@ export class AppServiceService {
       ⣿⣿⣿⠀⠀⠀⠀⣠⢎⡴⠿⢷⣄⠀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⢿⣿⣿⣿⣿⡿⠿⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠈
       ⢏⠻⠁⠀⠀⠀⠀⠸⣨⣾⣿⣿⣿⣇⠘⡀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈
       ⠇⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⢐⠁⠀⠀⠀⠀⡠⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-      `)
+      `;
     }
     if (rn > 8) {
-      return (`
+      return `
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⢁⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠋⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⢸⡿⠿⠟⣛⣋⣉⡉⠉⣛⢛⠻⢿⠇⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
@@ -149,10 +155,9 @@ export class AppServiceService {
 ⣿⣷⡄⠀⠀⢸⡿⢸⣿⣮⢿⡾⡿⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⢸⣿⡿⠀⠼⣹⣿⣿⣿⣿⣾⣿⠟⣿⢁⣾⡛⣧⢹
 ⣿⣿⣿⠀⠀⢸⡇⣿⣿⣗⣿⣿⡃⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⣸⣿⡇⢸⢰⣿⣿⣿⣿⠟⣩⡶⣡⡿⣼⣿⢡⣿⢸
 ⣿⣿⣿⡆⠀⠘⡇⣿⣿⣿⣮⣿⠇⠀⠀⠀⠸⣿⣿⣿⣿⣿⣿⢿⣿⣿⢠⣽⣿⠣⢧⣾⣿⡿⢋⠕⣰⠟⣼⡿⢃⣿⡿⣼⣿⣸
-      `)
-    } else 
-    if (rn > 6) {
-      return (`
+      `;
+    } else if (rn > 6) {
+      return `
          ⢀⣠⣦⡰⣶⣶⣶⣶⣶⣤⣶⡄⣄⣂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⢀⣶⣄⠘⠉⢿⡇⢻⠽⡿⢻⣿⢻⣾⢹⠋⣿⢇⣶⡙⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⣀⣴⣏⠉⢻⡇⠒⣈⡁⢤⣥⣀⣈⣤⣌⣑⠺⠴⣃⣪⣿⢓⡘⡄⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -201,10 +206,9 @@ export class AppServiceService {
 ⡛⠲⠶⠛⠛⠋⠉⡉⢉⣉⣠⣤⣶⣾⣾⣶⣆⣀⡀⠀⠉⠚⠠⠇⠱⠈⠄⠀⠛⠁⠀⠹⢻⣤⠀⣝⣛⠻⠿⠿⠿⠿⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣾⣷⣶⣦⣤⣀⡄⣀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠛⠛⠛⠹⠙⠖⠦⠒⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿
 ⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠶⠷⠾⠶⠷⠾⠶⠧⠦⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠿
-      `)
-    } else
-    if (rn > 4) {
-      return (`
+      `;
+    } else if (rn > 4) {
+      return `
 ⢾⣽⣻⢿⣴⣣⡿⠴⣿⢶⡱⠿⠶⣞⡹⢌⠳⡜⡅⠀⣀⣠⡤⢶⣒⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣯⣿⣶⣶⢦⣤⣀⠀⢈⢧⡙⠌⣓⣯⣿⡄⢯⠐⡐⢢⠐⡅⠂⡜⢠⠂⡱⢀⠃
 ⣿⣿⣽⣻⢶⡳⣇⠘⣿⢆⢣⠟⡳⢎⡳⢌⠳⢈⣴⠞⣫⣵⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣝⡻⢦⣄⠉⡒⡘⠟⡟⠆⣣⠂⠌⡀⢂⠤⠁⡜⡀⠆⢡⠈⡐
 ⣹⢯⡷⣏⢷⣻⣭⠌⢿⣎⠭⣊⠵⣨⠕⣠⡾⢋⣴⣿⣿⠟⣋⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣝⠻⣦⠉⡚⠴⣉⠦⠀⢂⠐⡀⠆⠐⡤⢁⠈⠄⢂⠐
@@ -238,10 +242,10 @@ export class AppServiceService {
 ⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⣿⣿⣷⣌⠛⠦⡙⠋⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢡⣿⡛⠀⠀⢸⡏⣰⢸⣧⢐⠤⡀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⣸⣿⣿⣿⣿⣿⣿⣾⣽⣯⣿⣿⣟⣿⣿⣿⣿⡇⢸⣿⣿⣿⣧⡐⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠘⢃⡄⠀⠀⢸⢃⣿⡎⣿⠘⣷⡌⠄⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⣾⣿⢿⣻⣿⣿⣷⠈⣿⣿⣿⣿⢿⣯⣿⣯⣿⣽⣿⣶⣿⡿⣇⠀⠀⠀⢸⣿⡇⣿⡇⣿⢻⡌⠄⠀⠀⠀⠀⠀⠀
-      `)
+      `;
     }
     if (rn > 3) {
-      return (`
+      return `
       ⣿⣿⣿⡏⣸⣿⣿⣿⣿⣿⣿⢃⣾⢋⠃⡻⣿⣿⣿⡇⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⣹⡟⢻⠿⢻⢹⡜⡰⠹⣼⣿⣿⣿⣿⣿⣿⣿⡆⢿⣿⣿⣆
       ⣿⣿⣿⢱⣿⣿⣿⣿⣿⣿⡟⣼⢏⡎⠰⢀⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠇⠰⡄⡄⢷⢡⣧⣿⣿⣿⣿⣿⣿⣿⣿⣿⡸⣿⣿⣿
       ⣿⣿⡇⣼⣿⣿⣿⣿⣿⣿⢣⡏⣼⣿⣷⣾⣿⣿⡏⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⣿⣿⣿⣿⣿⡟⣿⣿⣿⣿⣶⣾⣾⣿⣿⣿⡜⣿⣿⣿⣿⣿⣿⣿⡇⢿⣿⣿
@@ -275,10 +279,10 @@ export class AppServiceService {
       ⠁⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣬⣁⣈⣻⡟⠠⢿⡟⣰⣿⣿⣿⣿⣿⣆⢳⣤⣄⠻⠁⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠉⠻⠛⠻⢿⣿⣿⠿⠋⠀⠀⠀⢀⣾⣿⣿
       ⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⢿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⣿⣿⣿⣿⣿⣿⣿⡀⠿⠿⠁⠄⠿⠿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀⠀⠀⠈⠠⠄⠀⠀⠀⠀⠀⣼⣿⣿⣿
       ⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠇⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⢶⡆⠀⢰⠸⠖⢈⣿⣿⣿⠿⠛⠁⣠⣾⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿
-      `)
+      `;
     }
     if (rn > 2) {
-      return (`
+      return `
       ⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⢿⣿⡀⢀⠾⣿⡹⢧⣛⢧⣟⡏⣼⢻⣽⣻⣿⣿⣿⣿⢿⢹⣳⡻⣿⣿⡟⢸⣽⢳⣻⣿⣿⣿⣿⣿⣿⣞⠩⣿⡼⣇⣿⣇⠠⢻⣧⢂⢣⢻⣿⣿⣿⣷⣙⣿⣿⣿⣇
       ⠀⠀⠀⠀⠀⠀⢀⣾⣷⡄⢢⠠⠈⢀⡾⣛⡿⣝⡳⣏⢿⣽⢠⣟⢻⣷⣿⣿⠿⣛⣯⠏⣳⢷⡻⣽⢞⠅⣻⢸⣏⣷⢻⡼⣏⡿⣏⡿⣽⡂⣽⡃⣯⢟⣻⠀⢃⢿⣎⡆⢏⣿⣿⣿⣿⣿⠹⣿⣿⣿
       ⠀⠀⠀⠀⠀⠀⣾⡻⣟⡿⠆⠡⢀⡾⡵⣏⡿⣱⢯⡽⣾⡌⣴⣋⣾⣿⠟⣡⢟⡾⠅⢸⣛⡾⣝⣧⡟⢀⡏⢰⣻⡼⢯⡷⣏⡷⣏⡇⣳⠇⣳⡅⢯⣛⡷⠂⠘⡖⢻⡶⡘⣞⣶⢲⣭⣛⠇⢿⣿⣿
@@ -314,10 +318,10 @@ export class AppServiceService {
       ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⢂⠁⠆⢡⠈⢂⠡⢂⠐⡀⠆⡐⠀⠀⠀⠀⠐⠀⢀⠀⠀⠀⠀⠀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⡕⡀⠀⠀⠀⠀⠀⠀⠀
       ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⢂⠉⡐⢂⠡⠌⡐⢂⠡⠐⠂⡔⠀⢠⠀⠄⡀⢂⠀⠀⠀⠀⠄⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢷⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀
       ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⡈⠤⢁⠂⠆⢂⡁⠆⣈⠡⠡⣀⠃⠀⢧⠐⠁⠀⡀⠆⡐⠠⢀⠀⡀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣿⣿⣷⣄⠀⠀⠀⠀⠀
-      `)
+      `;
     }
     if (rn > 1) {
-      return (`
+      return `
       ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⢀⣤⢰⣾⣿⣿⣿⣿⣷⣶⣮⣻⣿⣶⣮⣝⠫⣿⡎⠻⣿⣷⣍⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
       ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠀⠀⢀⡆⣾⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣯⢻⣿⣿⣮⡀⠀⠈⢻⣿⣷⡿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
       ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⣰⢀⣾⣿⣿⣿⣧⢿⣿⣿⣿⣿⡿⡟⢿⣿⣿⡞⣯⢿⣿⣿⣿⣆⠀⠀⠹⣿⣿⡽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
@@ -362,9 +366,9 @@ export class AppServiceService {
       ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⣱⣿⣿⣿⢹⣿⢻⣿⣿⣽⢡⣾⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⢀⣀⣀⣄⣠⣀⣤⣴⣶⣶⣶⡶⣠⣿⣿⣿⣿⣿⣿⠟⣽⣾⣿⢀⡘⠻⣿⣿⣿⣿⣿⣿⡎⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣎⢿⣿⣿⣿⣿⣿⣿⣿⣿⣧⢻⣿⣿⡽⣿⣿⣧⡻⣿⣞⣿⣿⣿⣿⣿⣧⢿⣿⣿
       ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⣴⣿⣿⣿⡏⣿⢳⣿⡟⣸⢇⣼⣿⣆⢻⣿⣿⣿⣿⠿⣛⣫⣥⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢣⣿⣿⣿⣿⣿⣿⢏⣼⣿⣿⢧⣿⣿⣄⠈⠙⠻⣿⣿⣿⣷⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣎⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⢻⣿⣿⣿⣿⣿⣿⣌⣿⣞⣿⣿⣿⣿⣿⣿⣿⣿
       
-      `)
+      `;
     } else {
-      return (`
+      return `
       ⣿⣿⣿⣿⣿⣿⣿⣻⠿⣝⡿⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⢫⡿⣽⢣⡒⡄⠲⡐⢄⠢⠀⠀⢀⠠⣽
       ⣿⣿⣿⣿⣿⣿⣿⣻⣿⠙⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢫⢿⡽⣣⠕⡨⢁⠉⢂⠁⠠⠐⣤⣿⣿
       ⣿⣿⣿⣿⣿⣻⣿⣟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠫⣗⢇⢢⠐⠌⡰⠀⣌⣶⣿⡟⠓⢉
@@ -398,9 +402,8 @@ export class AppServiceService {
       ⠀⢆⡸⢌⢆⠡⣧⢷⡺⣝⡾⣽⢧⣛⠴⠉⠞⣋⣥⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⣏⢾⡹⣧⠞⣄⠂⠌⠀⠀⠀⠀⡀⠀⠀⠀
       ⡜⣢⢝⡲⣎⡷⠽⠳⢛⣙⣉⣉⣡⣤⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⣤⣈⠒⠽⣳⡟⣬⢋⠄⠀⠀⠀⠀⠀⠀⠐⠀
       ⠸⡁⢎⣡⣷⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⢸⣿⣿⣿⣶⣤⣌⣀⠉⠂⠀⠀⠀⠀⠀⠀⠀⠀
-      `)
+      `;
     }
   }
-
-
 }
+

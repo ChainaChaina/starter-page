@@ -1,7 +1,10 @@
 <div class="container">
-  <p class="greeting"> {{greetin}}</p>
-  <pre>
-    {{hentai}}
+  <div class="text-quote">
+    <p class="quote"> {{quote}}</p>
+    <p #aut class="author"> {{author}}</p>
+  </div>
+    <pre>
+    {{art}}
   </pre>
   <input #url style="opacity: 0;" (blur)="resetSearch()" [(ngModel)]="urlText" type="text">
 </div>
