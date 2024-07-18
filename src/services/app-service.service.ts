@@ -19,6 +19,7 @@ export class AppServiceService {
     { word: 'git', link: 'https://github.com/' },
     { word: 'twt', link: 'https://twitter.com/home' },
     { word: 'net', link: 'https://www.netflix.com/browse' },
+    { word: 'gpt', link: 'https://chatgpt.com/?model=auto' },
     {
       word: 'amv',
       link: 'https://www.primevideo.com/-/pt/storefront/ref=atv_hm_tv_c_9zZ8D2_hom?language=pt_BR',
@@ -76,11 +77,12 @@ export class AppServiceService {
 
   webSearch(payload: string) {
     const googleSearchUrl = `https://www.google.com/search?q=${payload}`;
-    window.location.href = googleSearchUrl;
+    window.open(googleSearchUrl, '_blank');
+
   }
 
   webGo(payload: string) {
-    window.location.href = payload;
+    window.open(payload, '_blank');
   }
 
   getHentai() {
